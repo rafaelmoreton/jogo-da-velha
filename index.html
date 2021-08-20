@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Pedra, Papel, Tesoura</title>
+</head>
+<body>
+<script>
+    let weapons = ['Pedra', 'Papel', 'Tesoura']
+    function computerPlay() {
+        let random = Math.floor(Math.random() * weapons.length);
+        return weapons[random];
+    }
+    function round(playerSelection, computerSelection) {
+        // Precisa de uma forma de comparar as armas selecionadas. Se a escolha do jogador for a arma Tesoura executar função tesoura e comparar com a arma do computador, se não for tesoura selecionar a função pedra...
+        if (playerSelection.toLowerCase === "pedra".toLocaleLowerCase) {
+            // Consegui fazer a comparação deles, mas agora como fazer para o argumento recebido pela função round ignorar maíusculas?
+            if (computerSelection.toLowerCase === "tesoura") {
+                return "Vitória!"
+            } else if (computerSelection.toLowerCase === "papel") {
+                return "Derrota"
+            } else {
+                return "Empate"
+            }
+        }
+        if (playerSelection === "papel") {
+            if (computerSelection === "pedra") {
+                return "Vitória!"
+            } else if (computerSelection === "tesoura") {
+                return "Derrota"
+            } else {
+                return "Empate"
+            }
+        }
+        if (playerSelection === "tesoura") {
+            if (computerSelection === "papel") {
+                return "Vitória!"
+            } else if (computerSelection === "pedra") {
+                return "Derrota"
+            } else {
+                return "Empate"
+            }
+        }
+    }
+</script>
+</body>
+</html>
