@@ -7,6 +7,8 @@
 <body>
 <script>
     let weapons = ['pedra', 'papel', 'tesoura']
+    let won = 0
+    let lost = 0
     function computerSelection() {
         let random = Math.floor(Math.random() * weapons.length);
         return weapons[random];
@@ -15,39 +17,51 @@
         let playerSelection = prompt("Escolha sua arma: pedra, papel ou tesoura?").toLowerCase()
         if (playerSelection === "pedra") {
             if (computerSelection() === "tesoura") {
-                return "Vitória!"
+                ++won
+                return "win"
             } else if (computerSelection() === "papel") {
-                return "Derrota"
+                ++lost
+                return "lose"
             } else {
-                return "Empate"
+                return "draw"
             }
         }
         if (playerSelection === "papel") {
             if (computerSelection() === "pedra") {
-                return "Vitória!"
+                ++won
+                return "win"
             } else if (computerSelection() === "tesoura") {
-                return "Derrota"
+                ++lost
+                return "lose"
             } else {
-                return "Empate"
+                return "draw"
             }
         }
         if (playerSelection === "tesoura") {
             if (computerSelection() === "papel") {
-                return "Vitória!"
+                ++won
+                return "win"
             } else if (computerSelection() === "pedra") {
-                return "Derrota"
+                ++lost
+                return "lose"
             } else {
-                return "Empate"
+                return "draw"
             }
         } else {
             return "Você não escolheu uma arma válida"
         }
     }
     function game() {
-        for (let i=0; i < 5; i++) {    
-            return round()
+        for (; (won < 5) && (lost < 5) ;) {    
+            console.log(round())
         }
-        // Por que o loop não funciona? Só executa uma vez e para
+        if (won === 5) {
+            won = 0; lost = 0
+            return "VITÓRIA"
+        } else if (lost === 5) {
+            won = 0; lost = 0
+            return "DERROTA"
+        }
     }
 </script>
 </body>
