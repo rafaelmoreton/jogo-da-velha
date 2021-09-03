@@ -5,64 +5,93 @@
     <title>Pedra, Papel, Tesoura</title>
 </head>
 <body>
+    <div>Escolha sua arma:</div>
+    <button id="pedra">Pedra</button>
+    <button id="papel">Papel</button>
+    <button id="tesoura">Tesoura</button>
+    <div id="results"></div>
+    <div id="score"></div>
 <script>
     let weapons = ['pedra', 'papel', 'tesoura']
     let won = 0
     let lost = 0
+    let thisResult = ""
+    const results = document.querySelector("#results");
+
     function computerSelection() {
         let random = Math.floor(Math.random() * weapons.length);
         return weapons[random];
     }
-    function round() {
-        let playerSelection = prompt("Escolha sua arma: pedra, papel ou tesoura?").toLowerCase()
+    function round(playerSelection) {
         if (playerSelection === "pedra") {
             if (computerSelection() === "tesoura") {
                 ++won
-                return "win"
+                thisResult = "Você escolheu Pedra; seu oponente, Tesoura. A vitória é sua."
+                return
             } else if (computerSelection() === "papel") {
                 ++lost
-                return "lose"
+                thisResult = "Você escolheu Pedra; seu oponente, Papel. Você foi derrotado."
+                return
             } else {
-                return "draw"
+                thisResult = "Os dois escolheram Pedra. Empataram"
+                return
             }
         }
         if (playerSelection === "papel") {
             if (computerSelection() === "pedra") {
                 ++won
-                return "win"
+                thisResult = "Você escolheu Papel; seu oponente, Pedra. A vitória é sua."
+                return
             } else if (computerSelection() === "tesoura") {
                 ++lost
-                return "lose"
+                thisResult = "Você escolheu Papel; seu oponente, Tesoura. Você foi derrotado."
+                return
             } else {
-                return "draw"
+                thisResult = "Os dois escolheram Papel. Empataram"
+                return
             }
         }
         if (playerSelection === "tesoura") {
             if (computerSelection() === "papel") {
                 ++won
-                return "win"
+                thisResult = "Você escolheu Tesoura; seu oponente, Papel. A vitória é sua."
+                return
             } else if (computerSelection() === "pedra") {
                 ++lost
-                return "lose"
+                thisResult = "Você escolheu Tesoura; seu oponente, Pedra. Você foi derrotado."
+                return
             } else {
-                return "draw"
+                thisResult = "Os dois escolheram Tesoura. Empataram"
+                return
             }
         } else {
-            return "Você não escolheu uma arma válida"
+            console.log("Você não escolheu uma arma válida")
+            return
         }
     }
-    function game() {
-        for (; (won < 5) && (lost < 5) ;) {    
-            console.log(round())
-        }
-        if (won === 5) {
-            won = 0; lost = 0
-            return "VITÓRIA"
-        } else if (lost === 5) {
-            won = 0; lost = 0
-            return "DERROTA"
-        }
-    }
+//    function game() {
+//        for (; (won < 5) && (lost < 5) ;) {  
+//            round()  
+//        }
+//        if ((won < 5) && (lost < 5)) {
+//            won = 0; lost = 0
+//            console.log("VITÓRIA")
+//            return
+//        } else if (lost === 5) {
+//            won = 0; lost = 0
+//           console.log("DERROTA")
+//            return
+//        }
+//    }
+    const buttons = document.querySelectorAll('button');
+    const score = document.querySelector("#score")
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            round(button.id);
+            results.textContent = thisResult; 
+            score.textContent = "Vitórias: " + won + " | " + "Derrotas: " + lost
+        });
+    });
 </script>
 </body>
 </html>
